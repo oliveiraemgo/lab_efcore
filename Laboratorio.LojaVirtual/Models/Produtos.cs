@@ -12,5 +12,11 @@ namespace Laboratorio.LojaVirtual
         public double PrecoUnitario { get; internal set; }
         public string Unidade { get; internal set; }
         public IList<PromocaoProdutos> Promocoes { get; set; }
+        public IList<Compra> Compras { get; set; }
+
+        public override string ToString()
+        {
+            return $"Nome: {this.Nome}";
+        }
     }
 }

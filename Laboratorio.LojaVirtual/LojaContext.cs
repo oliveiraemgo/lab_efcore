@@ -10,6 +10,7 @@ namespace Laboratorio.LojaVirtual
         public DbSet<Produtos> Produtos { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Promocao> Promocoes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
         public LojaContext() { }
 
@@ -17,13 +18,30 @@ namespace Laboratorio.LojaVirtual
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PromocaoProdutos>()
+            // pk composta
+            modelBuilder
+                .Entity<PromocaoProdutos>()
                 .HasKey(
                     pp => new 
                     { 
                         pp.PromocaoId, 
                         pp.ProdutoId 
                     });
+
+            // table name
+            modelBuilder
+                .Entity<Endereco>().
+                ToTable("Enderecos");
+
+            // shadow property
+            modelBuilder
+                .Entity<Endereco>()
+                .Property<int>("ClienteId");
+
+            // a pk de Endereco terá o mesmo valor da pk de Cliente
+            modelBuilder
+                .Entity<Endereco>()
+                .HasKey("ClienteId");
 
             base.OnModelCreating(modelBuilder);
         }

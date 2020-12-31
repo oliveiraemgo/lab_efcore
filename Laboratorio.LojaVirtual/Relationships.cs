@@ -7,6 +7,30 @@ namespace Laboratorio.LojaVirtual
     public static class Relationships
     {
         /// <summary>
+        /// One To One
+        /// 1 cliente possui 1 endereço
+        /// </summary>
+        public static void OneToOne()
+        {
+            var cliente = new Cliente();
+            cliente.Nome = "Cliente A";
+            cliente.EnderecoEntrega = new Endereco
+            {
+                Numero = "10",
+                Logradouro = "Rua A",
+                Complemento = "Casa 2",
+                Bairro = "Centro",
+                Cidade = "Cidade A"
+            };
+
+            using (var contexto = new LojaContext())
+            {
+                contexto.Clientes.Add(cliente);
+                contexto.SaveChanges();
+            }
+        }
+
+        /// <summary>
         /// One To Many
         /// 1 produto está em N compras
         /// </summary>
@@ -32,7 +56,7 @@ namespace Laboratorio.LojaVirtual
 
         /// <summary>
         /// Many To Many
-        /// 1 promoção tem N produtos
+        /// 1 promoção possui N produtos
         /// 1 produto está em N promoções
         /// </summary>
         public static void ManyToMany()
