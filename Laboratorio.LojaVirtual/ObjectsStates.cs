@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Laboratorio.LojaVirtual
 {
-    public class ObjectsStates
+    public static class ObjectsStates
     {
         /// <summary>
         /// Teste dos estados dos objetos
@@ -102,7 +102,7 @@ namespace Laboratorio.LojaVirtual
             Console.WriteLine(contexto.Entry(produto));
         }
 
-        private static void WriteStates(IEnumerable<EntityEntry> entries)
+        public static void WriteStates(IEnumerable<EntityEntry> entries)
         {
             var contexto = new LojaContext();
 

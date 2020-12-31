@@ -8,10 +8,25 @@ namespace Laboratorio.LojaVirtual
     public class LojaContext : DbContext
     {
         public DbSet<Produtos> Produtos { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Promocao> Promocoes { get; set; }
 
         public LojaContext() { }
 
         public LojaContext(DbContextOptions<LojaContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PromocaoProdutos>()
+                .HasKey(
+                    pp => new 
+                    { 
+                        pp.PromocaoId, 
+                        pp.ProdutoId 
+                    });
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

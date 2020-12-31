@@ -11,5 +11,6 @@ namespace Laboratorio.LojaVirtual
         public string Categoria { get; internal set; }
         public double PrecoUnitario { get; internal set; }
         public string Unidade { get; internal set; }
+        public IList<PromocaoProdutos> Promocoes { get; set; }
     }
 }
